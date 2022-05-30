@@ -1,6 +1,5 @@
 'use strict';
 
-console.log('I\'ll fetch from here!');
 
 async function data_fetch(url) {
     let response = await fetch(url);
@@ -8,19 +7,38 @@ async function data_fetch(url) {
     return data;
 }
 
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+}
+  
+
 function handleOptions(name, arr) {
+    let array = shuffle(arr);
     let options = [];
     options.push(name);
     for(let count = 0; count < 3; count++) {
-        let option = arr[Math.floor(Math.random() * arr.length)]
+        let option = array[Math.floor(Math.random() * array.length)]
         while(options.includes(option))
         {
-            option = arr[Math.floor(Math.random() * arr.length)];
+            option = array[Math.floor(Math.random() * array.length)];
         }
         options.push(option);
     }
-
-    return options
+    return shuffle(options);
 }
 
 /*
@@ -37,7 +55,7 @@ if (!localStorage.raw) {
 
     localStorage.setItem('raw', JSON.stringify(raw));
 }else {
-    raw = JSON.parse(localStorage.raw).slice(0,5);
+    raw = JSON.parse(localStorage.raw).slice(0,50);
 }
 
 let countries = raw.map(country => {
@@ -54,7 +72,7 @@ let flag = raw.map(country => {
         query: country.flags.svg,
         answer: country.name.common,
         category: "flag",
-        options: handleOptions(country.name.common, countries).sort(),
+        options: handleOptions(country.name.common, countries),
     })
 });
 
@@ -64,7 +82,7 @@ let capital = raw.map(country => {
         query: country.capital[0],
         answer: country.name.common,
         category: "capital",
-        options: handleOptions(country.name.common, countries).sort(),
+        options: handleOptions(country.name.common, countries),
     })
 })
 
@@ -73,7 +91,7 @@ let continent = raw.map(country => {
         query: country.name.common,
         answer: country.continents[0],
         category: "continent",
-        options: handleOptions(country.continents[0], continents).sort(),
+        options: handleOptions(country.continents[0], continents),
     })
 })
 
@@ -81,5 +99,6 @@ let continent = raw.map(country => {
 
 let questions = Array.from([].concat(flag, capital, continent));
 questions = questions.filter(question => question.query != undefined);
+questions = questions.filter(question => question.category != undefined)
 
 export {questions};

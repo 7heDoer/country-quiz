@@ -66,9 +66,9 @@ const Button = styled.button`
     }
 `
 
-const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext}) => {
-
+const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext, setScore, score}) => {
     const [correct, setCorrect] = useState(null);
+
 
     const handleButtonClick = (e) => {
         const target = e.target.closest('Button');
@@ -77,11 +77,17 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext}
         const option = target.innerText.split("\n")
         const option_text = option[option.length - 1];
 
+        let currentScore = score;
+
         if (option_text == answer) {
             setCorrect(true);
+            currentScore.correct++;
+            setScore(score)
             target.classList.add('correct');
         }else {
             setCorrect(false)
+            currentScore.incorrect++;
+            setScore(score)
             target.classList.add('incorrect');
             options.map(option => {
                 let opt_text = option.innerText.split("\n");
@@ -102,7 +108,7 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext}
   return (
     <li className="options_item">
         <Button
-            className='hover'
+            className='hover option_btn'
             onClick={handleButtonClick}
         >
             <span className='answer'>
@@ -111,7 +117,7 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext}
 
             <span className="check_icon">
                 {
-                    (correct) || (option == showCorrect) ? <MdCheckCircleOutline className='option_icon'/> : (correct === false) ? <MdHighlightOff className='option_icon'/> : null
+                    (correct) ? <MdCheckCircleOutline className='option_icon'/> : (correct === false) ? <MdHighlightOff className='option_icon'/> : null
                 }
             </span>
 

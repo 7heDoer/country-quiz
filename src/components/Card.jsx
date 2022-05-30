@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import undraw from '../img/undraw.svg'
 import styled from 'styled-components'
 import Question from './Question'
@@ -23,7 +23,8 @@ const Div = styled.div`
     }
 `
 
-const Card = ({question}) => {
+const Card = ({question, questions, setQuestion, setQuestions}) => {
+    const [score, setScore] = useState({correct: 0, incorrect: 0});
   return (
     <div className="card_component">
         <header className="header">
@@ -33,7 +34,14 @@ const Card = ({question}) => {
             </figure>
         </header>
         <Div>
-            <Question questionObj={question} />
+            <Question 
+                questionObj={question}
+                setQuestion={setQuestion} 
+                setScore={setScore}
+                score={score}
+                questions={questions}
+                setQuestions={setQuestions}
+            />
         </Div>
     </div>
   )

@@ -4,7 +4,6 @@ import Card from './components/Card.jsx';
 // import logo from './logo.svg'
 
 function App() {
-  const [qCount, setQCount] = useState({correct: 0, incorrect: 0})
   const [questions, setQuestions] = useState(Q);
   const [question, setQuestion] = useState(questions[Math.floor(Math.random() * questions.length)]);
 
@@ -12,7 +11,7 @@ function App() {
     <div className="App">
       <Card 
         question={question}
-        setQCount={setQCount}
+        setQuestion={setQuestion}
         questions={questions}
         setQuestions={setQuestions}
        />

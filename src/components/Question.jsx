@@ -18,12 +18,38 @@ const Button = styled.button`
     margin-inline-start: auto;
 `;
 
-const Question = ({questionObj}) => {
+const Question = ({questionObj, setScore, score, questions, setQuestions, setQuestion}) => {
     const [showCorrect, setShowCorrect] = useState('');
     const [showNext, setShowNext] = useState(false);
-    const next = <Button>Next</Button>
+
     const char_options = ['A', 'B', 'C', 'D'];
 
+    const handleNextClick = (e) => {
+        let questions_arr = questions.filter(question => question != questionObj)
+        setQuestions(questions_arr);
+        let new_questionObj = questions_arr[Math.floor(Math.random() * questions_arr.length)];
+        setQuestion(new_questionObj)
+
+        let option_btns = Array.from(document.getElementsByClassName('option_btn'))
+
+        option_btns.map(btn => {
+            btn.classList.add('hover');
+            btn.disabled = false;
+        })
+
+        let correct_class = document.querySelector('.correct');
+        let incorrect_class = document.querySelector('.incorrect');
+        if (correct_class) correct_class.classList.remove('correct');
+        if (incorrect_class) incorrect_class.classList.remove('incorrect');
+  
+
+        setShowNext(false);
+        // setCorrect(null);
+
+    }
+    
+    const next = <Button onClick={handleNextClick}>Next</Button>
+    
     let question;
 
     switch(questionObj.category) {
@@ -64,6 +90,8 @@ const Question = ({questionObj}) => {
                             showCorrect={showCorrect}
                             setShowCorrect={setShowCorrect}
                             setShowNext={setShowNext}
+                            setScore={setScore}
+                            score={score}
                         />
                     )
                 })
