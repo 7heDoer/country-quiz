@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import {MdArrowBack, MdAcUnit} from 'react-icons/md'
+import {MdCheckCircleOutline, MdHighlightOff} from 'react-icons/md'
 
 const Button = styled.button`
     display: flex;
@@ -16,6 +16,7 @@ const Button = styled.button`
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     line-height: 36px;
+    cursor: pointer;
 
     &.hover:hover {
         background-color: #F9A826;
@@ -36,8 +37,19 @@ const Button = styled.button`
     .check_icon {
         width: 30px;
         height: 30px;
+        margin-inline-start: auto;
     }
 
+    &.correct {
+        background-color: #60bf88;
+        border-color: #60bf88;
+        color: #fff;
+    }
+    &.incorrect {
+        background-color: #ea8282;
+        border-color: #ea8282;
+        color: #fff;
+    }
 
     @media (min-width: 500px) {
         font-size: 18px;
@@ -54,22 +66,53 @@ const Button = styled.button`
     }
 `
 
-const Option = ({char, option}) => {
+const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext}) => {
+
+    const [correct, setCorrect] = useState(null);
+
+    const handleButtonClick = (e) => {
+        const target = e.target.closest('Button');
+        if (target.disabled) return;
+        let options = Array.from(document.getElementsByClassName('hover'));
+        const option = target.innerText.split("\n")
+        const option_text = option[option.length - 1];
+
+        if (option_text == answer) {
+            setCorrect(true);
+            target.classList.add('correct');
+        }else {
+            setCorrect(false)
+            target.classList.add('incorrect');
+            options.map(option => {
+                let opt_text = option.innerText.split("\n");
+                if (opt_text[opt_text.length - 1] == answer) {
+                    option.classList.add('correct')
+                    setShowCorrect(opt_text[opt_text.length - 1])
+                    console.log(showCorrect)
+                }
+            })
+        }
+
+        options.map(option => option.classList.remove('hover'));
+        options.map(option => option.disabled = true);
+
+        setShowNext(true);
+    }
 
   return (
     <li className="options_item">
         <Button
             className='hover'
-            onClick={(e) => {
-
-            }}
+            onClick={handleButtonClick}
         >
             <span className='answer'>
                 <span className='char'>{char}</span> <span>{option}</span>
             </span>
 
             <span className="check_icon">
-
+                {
+                    (correct) || (option == showCorrect) ? <MdCheckCircleOutline className='option_icon'/> : (correct === false) ? <MdHighlightOff className='option_icon'/> : null
+                }
             </span>
 
         </Button>

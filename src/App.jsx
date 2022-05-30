@@ -5,14 +5,17 @@ import Card from './components/Card.jsx';
 
 function App() {
   const [qCount, setQCount] = useState({correct: 0, incorrect: 0})
-  const [question, setQuestion] = useState(Q[Math.floor(Math.random() * Q.length)]);
-  const [questions, setQuestions] = useState(Q.filter(q => q != question));
-  console.log(question)
-  console.log(questions)
+  const [questions, setQuestions] = useState(Q);
+  const [question, setQuestion] = useState(questions[Math.floor(Math.random() * questions.length)]);
 
   return (
     <div className="App">
-      <Card question={question} />
+      <Card 
+        question={question}
+        setQCount={setQCount}
+        questions={questions}
+        setQuestions={setQuestions}
+       />
     </div>
   )
 }

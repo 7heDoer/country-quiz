@@ -62,6 +62,8 @@ body {
   /* max-inline-size: 464px; */
 }
 
+
+
 .card_component .header {
   display: flex;
   position: relative;
@@ -75,4 +77,8 @@ body {
   position: absolute;
   right: 0;
   bottom: -2rem;
+}
+
+.next {
+  display: flex;
 }
