@@ -8,12 +8,71 @@
   box-sizing: border-box;
 }
 
-.App {
-  background-image: url('./img/background.png');
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+li {
+  max-inline-size: 100%;
 }
 
+body {
+  background-image: url('./img/background.png');
+
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-position: center center;
+
+
+
+  overflow-x: hidden;
+  block-size: 100vh;
+  max-inline-size: 100%;
+  max-block-size: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.App {
+  /* inline-size: 100%; */
+  /* block-size: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-inline: .3rem;
+}
+
+.options {
+  list-style: none;
+}
+
+.options li + li {
+  margin-block-start: 25px;
+}
+
+.question_text {
+  margin-block-end: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: #2f527b;
+  font-size: 24px;
+}
+
+.card_component {
+  /* max-inline-size: 464px; */
+}
+
+.card_component .header {
+  display: flex;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #f2f2f2;
+}
+
+.absolute {
+  position: absolute;
+  right: 0;
+  bottom: -2rem;
+}

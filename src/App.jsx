@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {questions as Q} from './util/clean_api.js';
+import Card from './components/Card.jsx';
 // import logo from './logo.svg'
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      App.js
+      <Card question={question} />
     </div>
   )
 }
