@@ -1,17 +1,32 @@
 'use strict';
 
 console.log('I\'ll fetch from here!');
+
 async function data_fetch(url) {
     let response = await fetch(url);
     let data = await response.json();
     return data;
 }
 
+function handleOptions(name, arr) {
+    let options = [];
+    options.push(name);
+    for(let count = 0; count < 3; count++) {
+        let option = arr[Math.floor(Math.random() * arr.length)]
+        while(options.includes(option))
+        {
+            option = arr[Math.floor(Math.random() * arr.length)];
+        }
+        options.push(option);
+    }
+
+    return options
+}
+
 /*
     Four question categories
         1. flag
         2. continent
-        3. currency
         4.capital
 */ 
 
@@ -34,18 +49,22 @@ let continents = raw.map(country => {
 })
 
 let flag = raw.map(country => {
+   
     return ({
         query: country.flags.svg,
         answer: country.name.common,
         category: "flag",
+        options: handleOptions(country.name.common, countries).sort(),
     })
 });
 
 let capital = raw.map(country => {
+
     return ({
         query: country.capital[0],
         answer: country.name.common,
         category: "capital",
+        options: handleOptions(country.name.common, countries).sort(),
     })
 })
 
@@ -54,6 +73,7 @@ let continent = raw.map(country => {
         query: country.name.common,
         answer: country.continents[0],
         category: "continent",
+        options: handleOptions(country.continents[0], continents).sort(),
     })
 })
 
