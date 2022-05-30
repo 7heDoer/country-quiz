@@ -82,4 +82,4 @@ let continent = raw.map(country => {
 let questions = Array.from([].concat(flag, capital, continent));
 questions = questions.filter(question => question.query != undefined);
 
-export {questions, countries, continents};
+export {questions};

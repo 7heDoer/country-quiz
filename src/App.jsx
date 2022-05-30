@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {questions as Q, countries, continents} from './util/clean_api.js';
+import {questions as Q} from './util/clean_api.js';
 // import logo from './logo.svg'
 
 function App() {
