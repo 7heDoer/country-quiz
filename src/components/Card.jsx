@@ -24,7 +24,7 @@ const Div = styled.div`
     }
 `
 
-const Card = ({question, questions, setQuestion, setQuestions}) => {
+const Card = ({question, questions_init, questions, setQuestion, setQuestions}) => {
     const [score, setScore] = useState({correct: 0, incorrect: 0});
     let total = score.correct + score.incorrect;
   return (
@@ -37,7 +37,13 @@ const Card = ({question, questions, setQuestion, setQuestions}) => {
         </header>
         <Div>
             {
-                (total == 10) ? <Results /> :
+                (total == 10) ? 
+                <Results
+                    correctAns={score.correct}
+                    questions={questions_init}
+                    setQuestions={setQuestions}
+                    setScore={setScore}
+                 /> :
                 <Question 
                     questionObj={question}
                     setQuestion={setQuestion} 

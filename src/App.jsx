@@ -7,10 +7,13 @@ function App() {
   const [questions, setQuestions] = useState(Q);
   const [question, setQuestion] = useState(questions[Math.floor(Math.random() * questions.length)]);
 
+  console.log(questions.length);
+
   return (
     <div className="App">
       <Card 
         question={question}
+        questions_init={Q}
         setQuestion={setQuestion}
         questions={questions}
         setQuestions={setQuestions}

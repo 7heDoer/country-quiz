@@ -26,6 +26,7 @@ const Question = ({questionObj, setScore, score, questions, setQuestions, setQue
 
 
     // questionObj.options = shuffle(questionObj.options);
+    console.log(questions.length);
 
     const char_options = ['A', 'B', 'C', 'D'];
 
