@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {MdCheckCircleOutline, MdHighlightOff} from 'react-icons/md'
 
@@ -66,8 +66,12 @@ const Button = styled.button`
     }
 `
 
-const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext, setScore, score, qCorrect, setQCorrect}) => {
-    const [correct, setCorrect] = useState(null);
+const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext, setScore, score}) => {
+
+    useEffect(() => {
+        if (document.querySelector('.show_icon'))
+            document.querySelector('.show_icon').classList.remove('show_icon');
+    }, [])
 
 
     const handleButtonClick = (e) => {
@@ -80,21 +84,20 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext,
         let currentScore = score;
 
         if (option_text == answer) {
-            setCorrect(true);
-            setQCorrect(true)
             currentScore.correct++;
             setScore(score)
             target.classList.add('correct');
+            target.children[1].querySelector('.option_correct').classList.add('show_icon');
         }else {
-            setCorrect(false)
-            setQCorrect(false)
             currentScore.incorrect++;
             setScore(score)
             target.classList.add('incorrect');
+            target.children[1].querySelector('.option_wrong').classList.add('show_icon');
             options.map(option => {
                 let opt_text = option.innerText.split("\n");
                 if (opt_text[opt_text.length - 1] == answer) {
                     option.classList.add('correct')
+                    option.children[1].querySelector('.option_correct').classList.add('show_icon');
                     setShowCorrect(opt_text[opt_text.length - 1])
                 }
             })
@@ -117,9 +120,8 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext,
             </span>
 
             <span className="check_icon">
-                {
-                    (correct== true && qCorrect == true) || (showCorrect == option) ? <MdCheckCircleOutline className='option_icon'/> : (correct === false) ? <MdHighlightOff className='option_icon'/> : null
-                }
+                <MdCheckCircleOutline className='option_icon option_correct'/>
+                <MdHighlightOff className='option_icon option_wrong'/>
             </span>
 
         </Button>

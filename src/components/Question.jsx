@@ -33,6 +33,7 @@ const Question = ({questionObj, setScore, score, questions, setQuestions, setQue
         let questions_arr = questions.filter(question => question != questionObj)
         setQuestions(questions_arr);
         let new_questionObj = questions_arr[Math.floor(Math.random() * questions_arr.length)];
+        new_questionObj.options = shuffle(new_questionObj.options);
         setQuestion(new_questionObj)
 
         let option_btns = Array.from(document.getElementsByClassName('option_btn'))
@@ -47,6 +48,8 @@ const Question = ({questionObj, setScore, score, questions, setQuestions, setQue
         if (correct_class) correct_class.classList.remove('correct');
         if (incorrect_class) incorrect_class.classList.remove('incorrect');
   
+
+        document.querySelector('.show_icon').classList.remove('show_icon');
 
         setShowNext(false);
         setQCorrect(null);
