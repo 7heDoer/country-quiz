@@ -66,7 +66,7 @@ const Button = styled.button`
     }
 `
 
-const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext, setScore, score}) => {
+const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext, setScore, score, qCorrect, setQCorrect}) => {
     const [correct, setCorrect] = useState(null);
 
 
@@ -81,11 +81,13 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext,
 
         if (option_text == answer) {
             setCorrect(true);
+            setQCorrect(true)
             currentScore.correct++;
             setScore(score)
             target.classList.add('correct');
         }else {
             setCorrect(false)
+            setQCorrect(false)
             currentScore.incorrect++;
             setScore(score)
             target.classList.add('incorrect');
@@ -94,7 +96,6 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext,
                 if (opt_text[opt_text.length - 1] == answer) {
                     option.classList.add('correct')
                     setShowCorrect(opt_text[opt_text.length - 1])
-                    console.log(showCorrect)
                 }
             })
         }
@@ -117,7 +118,7 @@ const Option = ({char, option, answer, showCorrect, setShowCorrect, setShowNext,
 
             <span className="check_icon">
                 {
-                    (correct) ? <MdCheckCircleOutline className='option_icon'/> : (correct === false) ? <MdHighlightOff className='option_icon'/> : null
+                    (correct== true && qCorrect == true) || (showCorrect == option) ? <MdCheckCircleOutline className='option_icon'/> : (correct === false) ? <MdHighlightOff className='option_icon'/> : null
                 }
             </span>
 

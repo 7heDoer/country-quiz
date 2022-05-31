@@ -101,4 +101,4 @@ let questions = Array.from([].concat(flag, capital, continent));
 questions = questions.filter(question => question.query != undefined);
 questions = questions.filter(question => question.category != undefined)
 
-export {questions};
+export {questions, shuffle};

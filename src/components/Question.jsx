@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Option from './Option'
 import styled from 'styled-components'
+import { shuffle } from '../util/clean_api';
 
 const Button = styled.button`
     padding-inline: 37px 36px;
@@ -21,6 +22,10 @@ const Button = styled.button`
 const Question = ({questionObj, setScore, score, questions, setQuestions, setQuestion}) => {
     const [showCorrect, setShowCorrect] = useState('');
     const [showNext, setShowNext] = useState(false);
+    const [qCorrect, setQCorrect] = useState(null);
+
+
+    // questionObj.options = shuffle(questionObj.options);
 
     const char_options = ['A', 'B', 'C', 'D'];
 
@@ -44,7 +49,7 @@ const Question = ({questionObj, setScore, score, questions, setQuestions, setQue
   
 
         setShowNext(false);
-        // setCorrect(null);
+        setQCorrect(null);
 
     }
     
@@ -92,6 +97,8 @@ const Question = ({questionObj, setScore, score, questions, setQuestions, setQue
                             setShowNext={setShowNext}
                             setScore={setScore}
                             score={score}
+                            qCorrect={qCorrect}
+                            setQCorrect={setQCorrect}
                         />
                     )
                 })
