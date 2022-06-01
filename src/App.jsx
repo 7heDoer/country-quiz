@@ -10,13 +10,18 @@ function App() {
 
   return (
     <div className="App">
-      <Card 
-        question={question}
-        questions_init={Q}
-        setQuestion={setQuestion}
-        questions={questions}
-        setQuestions={setQuestions}
-       />
+      <div className="app-container">
+        <Card 
+          question={question}
+          questions_init={Q}
+          setQuestion={setQuestion}
+          questions={questions}
+          setQuestions={setQuestions}
+        />
+      </div>
+      <footer className="footer">
+        created by <a href="https://devchallenges.io/portfolio/7heDoer">@7heDoer</a> - devChallenges.io
+      </footer>
     </div>
   )
 }

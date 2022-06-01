@@ -24,10 +24,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  /* position: relative; */
 }
 
 .App {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   margin-inline: .3rem;
@@ -121,3 +123,20 @@ body {
   opacity: 1;
 }
 
+.footer {
+  position: absolute;
+  bottom: .5rem;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  right: 0;
+  left: 0;
+  color: #f2f2f2;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.footer a {
+  color: inherit;
+  font-weight: 700;
+}
