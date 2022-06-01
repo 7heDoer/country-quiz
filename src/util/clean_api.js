@@ -51,9 +51,11 @@ function handleOptions(name, arr) {
 let raw;
 
 if (!localStorage.raw) {
-    raw = await data_fetch('https://restcountries.com/v3.1/all?fields=name,capital,flags,continents');
-
-    localStorage.setItem('raw', JSON.stringify(raw));
+    data_fetch('https://restcountries.com/v3.1/all?fields=name,capital,flags,continents')
+    .then(data => {
+        raw = data;
+        localStorage.setItem('raw', JSON.stringify(raw));
+    })
 }else {
     raw = JSON.parse(localStorage.raw);
 }
