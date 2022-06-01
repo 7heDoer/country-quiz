@@ -7,7 +7,6 @@ function App() {
   const [questions, setQuestions] = useState(Q);
   const [question, setQuestion] = useState(questions[Math.floor(Math.random() * questions.length)]);
 
-  console.log(questions.length);
 
   return (
     <div className="App">

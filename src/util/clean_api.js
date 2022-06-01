@@ -55,7 +55,7 @@ if (!localStorage.raw) {
 
     localStorage.setItem('raw', JSON.stringify(raw));
 }else {
-    raw = JSON.parse(localStorage.raw).slice(0,50);
+    raw = JSON.parse(localStorage.raw);
 }
 
 let countries = raw.map(country => {
