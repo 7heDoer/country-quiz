@@ -66,7 +66,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/7heDoer/country-quiz
+$ git clone https://github.com/HIIfeanyichukwu/country-quiz
 
 # Install dependencies
 $ npm install
@@ -85,5 +85,5 @@ $ npm start
 
 ## Contact
 
-- GitHub [@7heDoer](https://github.com/7heDoer)
-- Twitter [@7heDoer](https://twitter.com/7heDoer)
+- GitHub [@HIIfeanyichukwu](https://github.com/HIIfeanyichukwu)
+- Twitter [@HIIfeanyichukwu](https://twitter.com/HIIfeanyichukwu)
